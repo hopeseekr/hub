@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © BrainActs Commerce OÜ. All rights reserved.
+  ~ See LICENSE.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <!--<resource id="Magento_Backend::content">-->
+                    <!--<resource id="Magento_Backend::content_elements">-->
+                        <!--<resource id="BrainActs_StoreLocator::locator" title="Store Locator" translate="title" sortOrder="10">-->
+                            <!--<resource id="BrainActs_StoreLocator::save" title="Save Location" translate="title" sortOrder="10" />-->
+                            <!--<resource id="BrainActs_StoreLocator::delete" title="Delete Location" translate="title" sortOrder="20" />-->
+                        <!--</resource>-->
+                    <!--</resource>-->
+                <!--</resource>-->
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="BrainActs_Hub::config" title="BrainActs Hub" translate="title" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

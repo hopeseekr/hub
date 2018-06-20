@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c)  BrainActs Commerce OÜ. All rights reserved.
+  ~ See LICENSE.txt for license details.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="brainacts_extensions" translate="label" sortOrder="200">
+            <label>BrainActs Extensions</label>
+        </tab>
+    </system>
+</config>
