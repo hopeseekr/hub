@@ -5,13 +5,17 @@
   "require": {
     "php": "~5.6.5|7.0.2|7.0.4|7.0.6|~7.0.6|~7.1.0"
   },
-
   "authors": [
     {
       "name": "BrainActs Commerce Core Team",
       "email": "support@brainacts.com",
-      "homepage": "https://www.brainacts.com/",
-      "role": "Developer"
+      "homepage": "https://www.brainacts.com/"
+    }
+  ],
+  "license": "MIT",
+  "support": [
+    {
+      "email":"support@brainacts.com"
     }
   ],
   "autoload": {
@@ -22,5 +26,4 @@
       "BrainActs\\Hub\\": ""
     }
   }
-
 }
