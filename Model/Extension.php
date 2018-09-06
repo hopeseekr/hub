@@ -37,31 +37,23 @@ class Extension
     private $cache;
 
     /**
-     * @var mixed
-     */
-    private $serializer;
-
-    /**
      * Extension constructor.
      * @param DataObjectFactory $dataObjectFactory
      * @param ZendClientFactory $httpClientFactory
      * @param CacheInterface $cache
-     * @param Json|null $serializer
      */
     public function __construct(
         DataObjectFactory $dataObjectFactory,
         ZendClientFactory $httpClientFactory,
-        CacheInterface $cache,
-        Json $serializer = null
+        CacheInterface $cache
     ) {
         $this->dataObjectFactory = $dataObjectFactory;
         $this->httpClientFactory = $httpClientFactory;
         $this->cache = $cache;
-        $this->serializer = $serializer ?: ObjectManager::getInstance()->get(Json::class);
     }
 
     /**
-     * Return extension info
+     *
      * @param string $moduleName
      * @return \Magento\Framework\DataObject
      * @throws \Magento\Framework\Exception\LocalizedException
@@ -72,7 +64,6 @@ class Extension
         $data = $this->getServiceRequest($moduleName);
 
         $object = $this->dataObjectFactory->create();
-
         $object->addData($data);
 
         return $object;
@@ -87,9 +78,8 @@ class Extension
     {
         $responseBody = $this->getChachedResponse($extensionCode);
 
-        $url = $this->getGatewayUrl($extensionCode);
-
         if ($responseBody === false) {
+            $url = $this->getGatewayUrl($extensionCode);
             try {
                 $client = $this->httpClientFactory->create();
                 $client->setUri($url);
@@ -104,7 +94,7 @@ class Extension
             }
         }
 
-        return $this->serializer->unserialize($responseBody);
+        return json_decode($responseBody, true);
     }
 
     /**
