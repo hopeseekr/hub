@@ -9,16 +9,9 @@ namespace BrainActs\Hub\Model;
 use Magento\Framework\App\CacheInterface;
 use Magento\Framework\DataObjectFactory;
 use Magento\Framework\HTTP\ZendClientFactory;
-use Magento\Framework\Serialize\Serializer\Json;
-use Magento\Framework\App\ObjectManager;
 
-/**
- * Class Extension
- * @author BrainActs Commerce OÜ Core Team <support@brainacts.com>
- */
 class Extension
 {
-
     const PRODUCTION_URL = 'https://updates.brainacts.eu:8085/info/';
 
     /**
@@ -37,10 +30,9 @@ class Extension
     private $cache;
 
     /**
-     * Extension constructor.
-     * @param DataObjectFactory $dataObjectFactory
-     * @param ZendClientFactory $httpClientFactory
-     * @param CacheInterface $cache
+     * @param \Magento\Framework\DataObjectFactory $dataObjectFactory
+     * @param \Magento\Framework\HTTP\ZendClientFactory $httpClientFactory
+     * @param \Magento\Framework\App\CacheInterface $cache
      */
     public function __construct(
         DataObjectFactory $dataObjectFactory,
@@ -53,16 +45,12 @@ class Extension
     }
 
     /**
-     *
      * @param string $moduleName
      * @return \Magento\Framework\DataObject
-     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getExtensionInfo($moduleName)
     {
-
         $data = $this->getServiceRequest($moduleName);
-
         $object = $this->dataObjectFactory->create();
         $object->addData($data);
 
@@ -70,9 +58,8 @@ class Extension
     }
 
     /**
-     * Connect to BA server to get info about extension
      * @param string $extensionCode
-     * @return array
+     * @return array|mixed
      */
     private function getServiceRequest($extensionCode)
     {
@@ -91,6 +78,10 @@ class Extension
                 $data = $this->dataObjectFactory->create();
                 $data->setVersion(__('N/A'));
                 return $data->toArray();
+            } catch (\Exception $e) {
+                $data = $this->dataObjectFactory->create();
+                $data->setVersion(__('N/A'));
+                return $data->toArray();
             }
         }
 
@@ -98,7 +89,6 @@ class Extension
     }
 
     /**
-     * Set Data to cache
      * @param string $extensionCode
      * @param string $response
      * @return $this
@@ -110,8 +100,7 @@ class Extension
     }
 
     /**
-     * Return data from cache
-     * @param $extensionCode
+     * @param string $extensionCode
      * @return string
      */
     private function getChachedResponse($extensionCode)
@@ -120,8 +109,7 @@ class Extension
     }
 
     /**
-     * Return api url
-     * @param $extensionCode
+     * @param string $extensionCode
      * @return string
      */
     private function getGatewayUrl($extensionCode)
